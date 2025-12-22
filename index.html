@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Новогодний отсчёт до 2026 года с анимациями, снегом, музыкой и мини-играми">
+  <meta name="theme-color" content="#000000">
+
+  <!-- PWA для iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Новогодний отсчёт">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+  <!-- Манифест PWA -->
+  <link rel="manifest" href="web.app.manifest.json">
+
+  <title>🎄 Новогодний отсчёт 2026</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="background"></div>
+
+<canvas id="treeCanvas"></canvas>
+<div id="snow"></div>
+<div class="side-decor left"></div>
+<div class="side-decor right"></div>
+<div class="top-garland"></div>
+<div class="bottom-garland"></div>
+<div id="stars"></div>
+<div id="fireworks"></div>
+<div id="notification" class="notification"></div>
+
+<div class="card">
+  <div class="tabs">
+    <button id="countdownBtn" class="active">Отсчёт</button>
+    <button id="gamesBtn">Мини-игры</button>
+  </div>
+
+  <div id="countdownTab" class="tab-content">
+    <h1>🎄 До Нового года осталось</h1>
+
+    <div id="countdown">
+      <span><b id="days">0</b>д</span>
+      <span><b id="hours">0</b>ч</span>
+      <span><b id="minutes">0</b>м</span>
+      <span><b id="seconds">0</b>с</span>
+    </div>
+
+    <p id="message">
+      Нажми кнопку один раз — музыка включится в 00:00
+    </p>
+
+    <button id="musicBtn">Разрешить музыку 🎶</button>
+  </div>
+
+  <div id="gamesTab" class="tab-content" style="display: none;">
+    <h1>🎮 Новогодние мини-игры</h1>
+
+    <div class="game-section">
+      <h2>Игра на память</h2>
+      <div id="memoryGame" class="memory-grid"></div>
+      <p id="memoryScore">Счёт: 0</p>
+      <button id="resetMemory">Новая игра</button>
+    </div>
+
+    <div class="game-section">
+      <h2>Новогодний quiz</h2>
+      <div id="quizQuestion"></div>
+      <div id="quizOptions"></div>
+      <p id="quizScore">Счёт: 0</p>
+      <button id="nextQuiz">Следующий вопрос</button>
+    </div>
+  </div>
+</div>
+
+<audio id="music" loop preload="auto">
+  <source src="assets/audio/music.mp3" type="audio/mpeg">
+</audio>
+
+<script src="js/treeParticles.js"></script>
+<script src="js/app.js"></script>
+
+<!-- Регистрация Service Worker для PWA (оффлайн и установка) -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('Service Worker зарегистрирован:', reg.scope))
+        .catch(err => console.log('Ошибка регистрации SW:', err));
+    });
+  }
+</script>
+</body>
+</html>
