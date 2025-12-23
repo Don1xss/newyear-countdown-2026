@@ -1,24 +1,36 @@
 {
   "name": "Новогодний отсчёт 2026",
   "short_name": "Новый год 2026",
-  "description": "Красивый новогодний отсчёт с анимациями, снегом, музыкой и мини-играми",
-  "start_url": "/",
+  "description": "Красивый отсчёт до Нового года с играми, музыкой и поздравлением",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#00ffff",
-  "orientation": "any",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "assets/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
       "src": "assets/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icons/icon-192x192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/icons/icon-512x512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
