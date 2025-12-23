@@ -31,14 +31,57 @@
 <div id="fireworks"></div>
 <div id="notification" class="notification"></div>
 
+<!-- Полноэкранный обратный отсчёт за 10 секунд -->
+<div id="finalCountdownOverlay" class="final-countdown-overlay">
+  <div id="finalCountdownNumber"></div>
+</div>
+
+<!-- Модальное окно персонализации -->
+<div id="personalizationModal" class="modal">
+  <div class="modal-content">
+    <h2>🎄 Давай познакомимся!</h2>
+    <p>Введи своё имя и выбери новогоднего персонажа</p>
+    
+    <input type="text" id="userNameInput" placeholder="Твоё имя" maxlength="20">
+    
+    <div class="character-selection">
+      <label>
+        <input type="radio" name="character" value="tree" checked>
+        <span class="character-option">🎄 Ёлка</span>
+      </label>
+      <label>
+        <input type="radio" name="character" value="reindeer">
+        <span class="character-option">🦌 Олень</span>
+      </label>
+      <label>
+        <input type="radio" name="character" value="snowman">
+        <span class="character-option">⛄ Снеговик</span>
+      </label>
+    </div>
+    
+    <button id="savePersonalization">Сохранить и начать 🎉</button>
+  </div>
+</div>
+
 <div class="card">
+  <!-- Панель прогресса -->
+  <div class="player-progress">
+    <div id="playerInfo">
+      <span id="playerName"></span>
+      <span id="playerCharacter"></span>
+    </div>
+    <div id="playerLevel">Уровень: <span id="levelName">Гость</span></div>
+    <div id="playerScore">Очки: <span id="totalScore">0</span></div>
+  </div>
+
   <div class="tabs">
     <button id="countdownBtn" class="active">Отсчёт</button>
     <button id="gamesBtn">Мини-игры</button>
+    <button id="profileBtn">Профиль</button>
   </div>
 
   <div id="countdownTab" class="tab-content">
-    <h1>🎄 До Нового года осталось</h1>
+    <h1 id="greetingTitle">🎄 До Нового года осталось</h1>
 
     <div id="countdown">
       <span><b id="days">0</b>д</span>
@@ -60,28 +103,49 @@
     <div class="game-section">
       <h2>Игра на память</h2>
       <div id="memoryGame" class="memory-grid"></div>
-      <p id="memoryScore">Счёт: 0</p>
+      <p id="memoryScore">Счёт: 0 (Рекорд: 0)</p>
       <button id="resetMemory">Новая игра</button>
     </div>
 
     <div class="game-section">
       <h2>Новогодний quiz</h2>
+      <p id="quizCategory"></p>
       <div id="quizQuestion"></div>
       <div id="quizOptions"></div>
-      <p id="quizScore">Счёт: 0</p>
-      <button id="nextQuiz">Следующий вопрос</button>
+      <div id="quizTimer">Время: 30 сек</div>
+      <p id="quizScore">Счёт: 0 (Рекорд: 0)</p>
+      <p id="quizResult" style="display: none;"></p>
+      <button id="startQuiz">Начать quiz</button>
+      <button id="nextQuiz" style="display: none;">Следующий вопрос</button>
     </div>
+  </div>
+
+  <!-- Вкладка Профиль -->
+  <div id="profileTab" class="tab-content" style="display: none;">
+    <h1>🎖 Твой профиль</h1>
+    <div class="profile-info">
+      <p><strong>Имя:</strong> <span id="profileName"></span></p>
+      <p><strong>Персонаж:</strong> <span id="profileCharacter"></span></p>
+      <p><strong>Уровень:</strong> <span id="profileLevel"></span></p>
+      <p><strong>Общий счёт:</strong> <span id="profileTotalScore"></span></p>
+      <p><strong>Рекорд в памяти:</strong> <span id="profileMemoryHigh"></span></p>
+      <p><strong>Рекорд в квизе:</strong> <span id="profileQuizHigh"></span></p>
+    </div>
+    <button id="resetProgress">Сбросить прогресс</button>
   </div>
 </div>
 
-<audio id="music" loop preload="auto">
-  <source src="assets/audio/music.mp3" type="audio/mpeg">
+<audio id="backgroundMusic" loop preload="auto">
+  <source src="assets/audio/background.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="newyearMusic" preload="auto">
+  <source src="assets/audio/newyear.mp3" type="audio/mpeg">
 </audio>
 
 <script src="js/treeParticles.js"></script>
 <script src="js/app.js"></script>
 
-<!-- Регистрация Service Worker для PWA (оффлайн и установка) -->
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
